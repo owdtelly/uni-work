@@ -1,0 +1,143 @@
+<script type="text/javascript" src="http://staff.city.ac.uk/~sbbb717/moodle/2015-2016/ee2425/common/shCore.js"></script>
+<script type="text/javascript" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/shBrushPython.min.js"></script>
+<link href="http://staff.city.ac.uk/~sbbb717/moodle/2015-2016/ee2425/common/shCore.css" rel="stylesheet" type="text/css" />
+<link href="http://staff.city.ac.uk/~sbbb717/moodle/2015-2016/ee2425/common/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+
+<style type="text/css">
+body {counter-reset: h3}
+  h3 {counter-reset: h4}
+
+  /*h3:before {counter-increment: h3; content: counter(h3) ". "}
+  h4:before {counter-increment: h4; content: counter(h3) "." counter(h4) ". "}*/
+  
+/*page heading*/
+h2 {color:#931713;border-bottom:2px;solid;font-size:3em;font-family:sans-serif;font-weight:normal;text-align:center}
+
+/*first heading*/
+h3 {color:#004080;font-weight:bold;font-family:sans-serif;font-weight:normal;padding-top0.8em;font-size:2em}
+
+/*second heading*/
+
+h4 {color:#297c44;font-weight:bold;font-family:sans-serif;font-weight:normal;padding-top:0.2em;font-size:1.5em}
+
+p,ul,td,div {color:#444444;font-family:sans-serif;text-align:justify}
+
+li{padding-top:0.2em;padding-bottom:0.2em}
+
+div.event {}
+.note{background-color:eee468}
+
+  .menuitem	{background-color:#dddddd;  border:1px solid #b0b0b0; }
+  .attrib	{background-color:#ffccaa;}
+  .question	{background-color:#ccffcc;  border:1px solid #b0b0b0; padding:10px}
+</style>
+
+<p>The purpose of this exercise is to practice using Tableau and how to design effective visualisation using the grammar of graphics. <b>Tableau Desktop</b> is off-the-shelf software for information visualisation, an introduction to which is provided below. It is not intended to be a comprehensive guide, it really just gives the basics and relates the way they work with the theory described in the lectures. Use the examples and web search to help use them.</p>
+
+<p>We provide some guidance here, but are expecting you to fill in the gaps. Teaching staff may not very experienced with all of these tools, so don't expect them to be able to answer all your questions on the tools and libraries themselves, but they will help you try to work things out for yourselves if you get stuck.</p>
+
+
+<h3>Introduction to Tableau</h3>
+
+<p>Tableau is becoming quite widely used in industry. It's competing against Qlik and Microsoft PowerPI, but Tableau is better for teaching information visualisation principles (in my opinion). You'll need to install Tableau and <a href="https://www.tableau.com/en-gb/academic/students">get a student licence</a>. Until then, you can use the trial version.</P>
+
+<h4>Load data</h4>
+
+<p>These examples were created with Kaggle's <a href="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/Automobile_data.csv">automobile dataset</a>. Download this and try and follow along.</p>
+
+<p>You can load data using <span class="menuitem">File -&gt; Open</span> or just drag your data file into the middle of the window. Tableau will show a preview of your data. You can drag in multiple files and link them on common attributes and Tableau will compile these into a big table.</p>
+
+<p>Click on <span class="menuitem">Sheet 1</span> to go to the visualisation worksheet. You can create as many of these as you want using the icon to the right of this. And you can always return to the <span class="menuitem">data source</span> tab.</p>
+
+<img style="max-width:600px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/1.png"/> 
+
+<h4>Data variables</h4>
+
+<p>The variables imported will be listed in the left. These are divided into <span class="menuitem">Dimensions</span> and <span class="menuitem">Measures</span>. This broadly corresponds to the <b>quantitative</b> (internal and ratio) and <b>categorical</b> (ordinal and nominal) data types from the lecture. Tableau has automatically inferred the variable types. If it got it wrong you can drag it between the dimensions and measure, or right-click for have options to convert and set the data types. The icons to the right indicate the data types.</p>
+
+<img style="max-width:600px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/2.png"/>
+
+
+
+<h4>Visual variables</h4>
+
+
+<img width="300" align="right" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/7.png"/> 
+<p>In Tableau, you construct graphics by <b>choosing your marks</b> and <b>mapping data variables</b> to <b>visual variables</b>, by dragging the variable into a "shelf".</p>
+
+<ul>
+	<li><b>Mark type:</b> the <span class="menuitem">Marks</span> dropdown list
+	<li><b>Position:</b> x-position is the <span class="menuitem">column</span> shelf and y-position is the <span class="menuitem">row</span> shelf. Whether the variable is <b>categorical</b> or <b>quantitative</b> will have an effect.
+	<li><b>Aligned length:</b> the <span class="menuitem">column</span> and <span class="menuitem">row</span> shelves with "bar" selected from the <span class="menuitem">marks</span> menu.
+	<li><b>Size:</b> the <span class="menuitem">Size</span> shelf. Clicking on it lets you scale the size.
+	<li><b>Colour (lightness and hue):</b> the <span class="menuitem">Color</span> and shelf. Whether the variable is <b>categorical</b> or <b>quantitative</b> will have an effect. Clicking on it gives you colour options, including opacity.
+	<li><b>Shape:</b> Shape can be encoded by choosing "Shape" from the <span class="menuitem">Marks</span> menu and usind the <span class="menuitem">Shape</span> shelf. Clicking on it lets you choose the shapes.
+	<li><b>Text:</b> Add labels using <span class="menuitem">Text</span> shelf. Clicking on it give you some more options.
+</ul>
+
+<p>You can also <b>filter</b> data by dragging the variable to the <span class="menuitem">Filter</span> shelf.</p>
+
+
+<h4>Aggregate</h4>
+
+<p>Tableau automatically aggregates data, producing a <b>mark</b> for each subset. See below. This is <b>on</b> by default. To turn this on and off use <span class="menuitem">Analysis &gt; aggregate measures</span>.</p>
+
+<img style="max-width:400px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/10.png"/><img style="max-width:400px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/11.png"/> 
+
+
+
+<h4>Combining layers</h4>
+
+<p>To <b>juxtapose</b> charts for different variables, you can add those variables into the <span class="menuitem">column</span> and <span class="menuitem">row</span> shelves. To overlay, right-click on the variable and choose <span class="menuitem">dual axis</span>. In the example below, the first two variables are overlayed</p>
+
+<img style="max-width:600px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/3.png"/> 
+
+<img style="max-width:600px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/13.png"/> 
+
+<p>You can also create a Tableau dashboard which lets you layout any number of worksheet in any way you want. Examples next week.</p>
+
+
+<h4>Binning</h4>
+
+<p>As mentioned in the lecture, quite a few visualisation type require binning.</p>
+
+<p>Histograms are one such visualisation. You need to derive a new variable that a set of fixed-sized bins and that plot a graph were aligned-length encodes the frequency for each bin. In Tableau, you can create bins by right-clicking on the quantitative variable and choosing <span class="menuitem">Create -&gt; bins</span>. The dialog box gives some summary statistics and suggests a bin size choose you bin size and click <span class="menuitem">OK</span>. The bins will be a <span class="menuitem">dimension</span>, so will be listed there. For a histogram, you should also make the bars as wide as possible (click on the <span class="menuitem">size</span> shelf).</p>
+
+
+<img style="max-width:600px; width:100%" src="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/14.png"/> 
+
+<h4>Interaction</h4>
+
+<p>We'll "do" interaction next week, but you'll have found that Tableau is highly interactive - more next week.</p>
+
+
+
+
+
+
+<h3>Exercises</h3>
+
+
+<h4>Exercise 4.1: Make some graphics</h4>
+
+<p>Using the <a href="http://staff.city.ac.uk/~sbbb717/moodle/2020-2021/inm433/session01/IRIS.csv">iris dataset</a>, describe the data in the same way as you did in Vega-Lite.</p>
+
+<ul>
+	<li><b>Scatterplot</b> for showing the relationship between two variables, with meaningfully coloured and sized dots. You can also try using the shape visual variable on the dots. Also try facetting the plot (on a categorical variable), but you might need to concatenate several separate plots	to achieve this in Altair.
+	<li><b>Strip plot</b> for showing the distribution of one variable. You may need to adjust the opacity if there's too much overlap
+	<li><b>Histogram</b> for showing the distribution of one variable. This is usually better than a strip plot. You will need to bin the data of your chosen variable and use <i>aligned length</i> to show the frequency/counts in each bin.
+	<li><b>Barchart</b> for showing comparing values between categories. Make sure you have a quantitative variable on one axis and a categorical one on the other. You may need to aggregate your data and use the <i>count</i> , <i>average</i> or some other summarisation function.	
+	<li><b>Boxplots</b> for showing some of the statistical variation lost in the barcharts.	
+	<li>Any other kind of chart you think is appropriate. You might find some inspiration in the lecture.	
+</ul>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	SyntaxHighlighter.all()
+</script>
