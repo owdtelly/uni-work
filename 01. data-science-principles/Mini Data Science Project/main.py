@@ -88,6 +88,9 @@ columns_to_drop = [
     "Reason",
     "WeatherDescription",
     "Reason",
+    "ObservationDay",
+    "TimeofObservation",
+    "FeelsLike",
 ]
 
 clean_data = data.drop(columns=columns_to_drop)
@@ -96,11 +99,11 @@ column_names = clean_data.columns.to_list()
 
 column_order = [
     "Weather",
-    "ObservationDay",
-    "TimeofObservation",
+    # "ObservationDay",
+    # "TimeofObservation",
     "CloudCover",
     "Temperature",
-    "FeelsLike",
+    # "FeelsLike",
     "Humidity",
     "Precipitation",
     "Pressure",
@@ -114,9 +117,9 @@ clean_data = clean_data[column_order]
 
 ### Encode date and time columns
 
-clean_data.ObservationDay = OrdinalEncoder().fit_transform(
-    clean_data[["ObservationDay"]]
-)
+# clean_data.ObservationDay = OrdinalEncoder().fit_transform(
+#     clean_data[["ObservationDay"]]
+# )
 
 
 ### Check again for nulls
@@ -163,12 +166,27 @@ classification = classification_report(y_test, prediction)
 
 confusion = confusion_matrix(y_test, prediction)
 
+coeff = regressor.coef_[0]
+
+odds_ratio = np.exp(coeff)
+
 
 print(f"Accuracy Score: {accuracy: .2f}")
 
 print("Classification:\n", classification)
 
 print("Confusion Matrix:\n", confusion)
+
+print("Coefficients:", coeff)
+
+print("Odds Ratio", odds_ratio)
+
+
+roc_auc = roc_auc_score(y_test, prediction)
+
+print(roc_auc)
+
+precision, recall, thresholds = precision_recall_curve(y_test, prediction)
 
 
 ### Adding class weights to account for imbalance between issue being true vs false
@@ -194,12 +212,20 @@ weighted_confusion = confusion_matrix(
     weighted_prediction,
 )
 
+weighted_coeff = weighted_regressor.coef_[0]
+
+weighted_odds_ratio = np.exp(weighted_coeff)
 
 print(f"Weighted Accuracy Score: {weighted_accuracy: .2f}")
 
 print("Weighted Classification:\n", weighted_classification)
 
 print("Weighted Confusion Matrix:\n", weighted_confusion)
+
+print("Weighted Coefficients:", weighted_coeff)
+
+print("Weighted Odds Ratio", weighted_odds_ratio)
+
 
 ### More metrics for checking model
 
@@ -211,12 +237,12 @@ precision, recall, thresholds = precision_recall_curve(y_test, weighted_predicti
 
 ### Produce a plot of the precision and recall
 
-plt.figure(figsize=(8, 8))
-plt.plot(recall, precision, marker=".")
-plt.xlabel("Recall")
-plt.ylabel("Precision")
-plt.title("Precision-Recall Curve")
-plt.show()
+# plt.figure(figsize=(8, 8))
+# plt.plot(recall, precision, marker=".")
+# plt.xlabel("Recall")
+# plt.ylabel("Precision")
+# plt.title("Precision-Recall Curve")
+# plt.show()
 
 
 ### lower threshold of predictor
